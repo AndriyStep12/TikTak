@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tick tack</title>
+
+
+    <style>
+        body {
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .area {
+            width: 500px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .area__row {
+            display: flex;
+            width: 100%;
+            height: 33.33%;
+            margin: 5px;
+        }
+
+        .box {
+            width: 33.33%;
+            height: 100%;
+            border: 1px solid #333;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: white;
+            font-weight: 900;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="area">
+        <div class="area__row">
+            <div id="cell1_1" class="box"></div>
+            <div id="cell1_2" class="box"></div>
+            <div id="cell1_3" class="box"></div>
+
+        </div>
+        <div class="area__row">
+            <div id="cell2_1" class="box"></div>
+            <div id="cell2_2" class="box"></div>
+            <div id="cell2_3" class="box"></div>
+        </div>
+        <div class="area__row">
+            <div id="cell3_1" class="box"></div>
+            <div id="cell3_2" class="box"></div>
+            <div id="cell3_3" class="box"></div>
+        </div>
+    </div>
+
+
+    <script>
+        function game() {
+             let c1_1 = {
+                "name": 'cell1_1',
+                "value": false,
+                "sign": ''
+            };
+
+            let c1_2 = {
+                "name": 'cell1_2',
+                "value": false,
+                "sign": ''
+            };
+
+            let c1_3 = {
+                "name": 'cell1_3',
+                "value": false,
+                "sign": ''
+            };
+
+
+            let c2_1 = {
+                "name": 'cell2_1',
+                "value": false,
+                "sign": ''
+            };
+
+            let c2_2 = {
+                "name": 'cell2_2',
+                "value": false,
+                "sign": ''
+            };
+
+            let c2_3 = {
+                "name": 'cell2_3',
+                "value": false,
+                "sign": ''
+            };
+
+            let c3_1 = {
+                "name": 'cell3_1',
+                "value": false,
+                "sign": ''
+            };
+
+            let c3_2 = {
+                "name": 'cell3_2',
+                "value": false,
+                "sign": ''
+            };
+
+            let c3_3 = {
+                "name": 'cell3_3',
+                "value": false,
+                "sign": ''
+            };
+            let arr = [];
+            arr.push(c1_1);
+            arr.push(c1_2);
+            arr.push(c1_3);
+
+            arr.push(c2_1);
+            arr.push(c2_2);
+            arr.push(c2_3);
+
+            arr.push(c3_1);
+            arr.push(c3_2);
+            arr.push(c3_3);
+
+            arr_uses = [];
+
+            function setTrue(arr) {
+                c1_1.value = 'true';
+                c1_2.value = 'true';
+                c1_3.value = 'true';
+                c2_1.value = 'true';
+                c2_2.value = 'true';
+                c2_3.value = 'true';
+                c3_1.value = 'true';
+                c3_2.value = 'true';
+                c3_3.value = 'true';
+            }
+            let status = false;
+
+            function checkWinner(arr, sign) {
+                if (c1_1.sign == sign && c1_2.sign == sign && c1_3.sign == sign) {
+                    console.log('winner: ' + sign);
+                    setTrue(arr);
+                    status = true;
+                    document.getElementById("result").innerHTML = sign + ' winner';
+                } else if (c2_1.sign == sign && c2_2.sign == sign && c2_3.sign == sign) {
+                    console.log('winner: ' + sign);
+                    setTrue(arr);
+                    status = true;
+                    document.getElementById("result").innerHTML = sign + ' winner';
+                } else if (c3_1.sign == sign && c3_2.sign == sign && c3_3.sign == sign) {
+                    console.log('winner: ' + sign);
+                    setTrue(arr);
+                    status = true;
+                    document.getElementById("result").innerHTML = sign + ' winner';
+                } else if (c1_1.sign == sign && c2_2.sign == sign && c3_3.sign == sign) {
+                    console.log('winner: ' + sign);
+                    setTrue(arr);
+                    status = true;
+                    document.getElementById("result").innerHTML = sign + ' winner';
+                } else if (c3_1.sign == sign && c2_2.sign == sign && c1_3.sign == sign) {
+                    console.log('winner: ' + sign);
+                    setTrue(arr);
+                    status = true;
+                    document.getElementById("result").innerHTML = sign + ' winner';
+                } else if (c1_3.sign == sign && c2_3.sign == sign && c3_3.sign == sign) {
+                    console.log('winner: ' + sign);
+                    setTrue(arr);
+                    status = true;
+                    document.getElementById("result").innerHTML = sign + ' winner';
+                } else if (c1_1.sign == sign && c2_1.sign == sign && c3_1.sign == sign) {
+                    console.log('winner: ' + sign);
+                    setTrue(arr);
+                    status = true;
+                    document.getElementById("result").innerHTML = sign + ' winner';
+                } else if (c1_2.sign == sign && c2_2.sign == sign && c3_2.sign == sign) {
+                    console.log('winner: ' + sign);
+                    setTrue(arr);
+                    status = true;
+                    document.getElementById("result").innerHTML = sign + ' winner';
+                }
+            }
+
+            let color_o = '#F0C442';
+            let fontColot_o = '#fff';
+            let color_x = '#3D5EF0';
+            let fontColot_x = '#fff';
+
+            function setZero(arr) {
+                if (arr.length != 0 && status != true) {
+                    let len = arr.length;
+                    let num = Math.floor(Math.random() * len);
+                    arr[num].value = 'true';
+                    arr[num].sign = 'O';
+                    document.getElementById(arr[num].name).innerHTML = 'O';
+                    document.getElementById(arr[num].name).style.backgroundColor = color_o;
+                    document.getElementById(arr[num].name).style.color = fontColot_o;
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == arr[num].name) {
+                            arr_uses.push(arr[num]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                }
+                checkWinner(arr_uses, 'o');
+            }
+            document.getElementById("cell1_1").onclick = function() {
+                if (c1_1.value == false) {
+                    c1_1.value = true;
+                    c1_1.sign = 'X';
+                    document.getElementById("cell1_1").innerHTML = 'X';
+                    document.getElementById("cell1_1").style.backgroundColor = color_x;
+                    document.getElementById("cell1_1").style.color = fontColot_x;
+
+
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == "cell1_1") {
+                            arr_uses.push(arr[i]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                    checkWinner(arr_uses, 'X');
+                    setZero(arr);
+                }
+            };
+            document.getElementById("cell1_2").onclick = function() {
+                if (c1_2.value == false) {
+                    c1_2.value = true;
+                    c1_2.sign = 'X';
+
+                    document.getElementById("cell1_2").innerHTML = 'X';
+                    document.getElementById("cell1_2").style.backgroundColor = color_x;
+                    document.getElementById("cell1_2").style.color = fontColot_x;
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == "cell1_2") {
+                            arr_uses.push(arr[i]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                    checkWinner(arr_uses, 'X');
+                    setZero(arr);
+                }
+            };
+            document.getElementById("cell1_3").onclick = function() {
+                if (c1_3.value == false) {
+                    c1_3.value = true;
+                    c1_3.sign = 'X';
+                    document.getElementById("cell1_3").innerHTML = 'X';
+                    document.getElementById("cell1_3").style.backgroundColor = color_x;
+                    document.getElementById("cell1_3").style.color = fontColot_x;
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == "cell1_3") {
+                            arr_uses.push(arr[i]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                    checkWinner(arr_uses, 'X');
+                    setZero(arr);
+                }
+            };
+            document.getElementById("cell2_1").onclick = function() {
+                if (c2_1.value == false) {
+                    c2_1.value = true;
+                    c2_1.sign = 'X';
+                    document.getElementById("cell2_1").innerHTML = 'X';
+                    document.getElementById("cell2_1").style.backgroundColor = color_x;
+                    document.getElementById("cell2_1").style.color = fontColot_x;
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == "cell2_1") {
+                            arr_uses.push(arr[i]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                    checkWinner(arr_uses, 'X');
+                    setZero(arr);
+                }
+            };
+            document.getElementById("cell2_2").onclick = function() {
+                if (c2_2.value == false) {
+                    c2_2.value = true;
+                    c2_2.sign = 'X';
+                    document.getElementById("cell2_2").innerHTML = 'X';
+                    document.getElementById("cell2_2").style.backgroundColor = color_x;
+                    document.getElementById("cell2_2").style.color = fontColot_x;
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == "cell2_2") {
+                            arr_uses.push(arr[i]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                    checkWinner(arr_uses, 'X');
+                    setZero(arr);
+                }
+            };
+            document.getElementById("cell2_3").onclick = function() {
+                if (c2_3.value == false) {
+                    c2_3.value = true;
+                    c2_3.sign = 'X';
+                    document.getElementById("cell2_3").innerHTML = 'X';
+                    document.getElementById("cell2_3").style.backgroundColor = color_x;
+                    document.getElementById("cell2_3").style.color = fontColot_x;
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == "cell2_3") {
+                            arr_uses.push(arr[i]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                    checkWinner(arr_uses, 'X');
+                    setZero(arr);
+                }
+            };
+            document.getElementById("cell3_1").onclick = function() {
+                if (c3_1.value == false) {
+                    c3_1.value = true;
+                    c3_1.sign = 'X';
+                    document.getElementById("cell3_1").innerHTML = 'X';
+                    document.getElementById("cell3_1").style.backgroundColor = color_x;
+                    document.getElementById("cell3_1").style.color = fontColot_x;
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == "cell3_1") {
+                            arr_uses.push(arr[i]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                    checkWinner(arr_uses, 'X');
+                    setZero(arr);
+                }
+            };
+            document.getElementById("cell3_2").onclick = function() {
+                if (c3_2.value == false) {
+                    c3_2.value = true;
+                    c3_2.sign = 'X';
+                    document.getElementById("cell3_2").innerHTML = 'X';
+                    document.getElementById("cell3_2").style.backgroundColor = color_x;
+                    document.getElementById("cell3_2").style.color = fontColot_x;
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == "cell3_2") {
+                            arr_uses.push(arr[i]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                    checkWinner(arr_uses, 'X');
+                    setZero(arr);
+                }
+            };
+            document.getElementById("cell3_3").onclick = function() {
+                if (c3_3.value == false) {
+                    c3_3.value = true;
+                    c3_3.sign = 'X';
+                    document.getElementById("cell3_3").innerHTML = 'X';
+                    document.getElementById("cell3_3").style.backgroundColor = color_x;
+                    document.getElementById("cell3_3").style.color = fontColot_x;
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].name == "cell3_3") {
+                            arr_uses.push(arr[i]);
+                            arr.splice(arr.indexOf(arr[i]), 1);
+                        }
+                    }
+                    checkWinner(arr_uses, 'X');
+                    setZero(arr);
+                }
+            };
+        }
+        game();
+    </script>
+
+</body></html>
